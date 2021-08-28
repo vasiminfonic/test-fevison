@@ -29,7 +29,7 @@ app.use('/user',userRouter);
 
 
 
-const filePath = path.resolve(__dirname, '../fevison/build', 'index.html')
+const filePath = path.resolve(__dirname, 'fevison/build', 'index.html')
 
 app.get('/', function(request, response) {
   console.log('Home page visited!');
@@ -102,7 +102,7 @@ app.get('/blogs/blog/:blogId/',async function(request, response) {
   });
 });
 
-app.use(express.static(path.resolve(__dirname, '../fevison/build')));
+app.use(express.static(path.resolve(__dirname, 'fevison/build')));
 
 
 app.listen(PORT, () => console.log('Server is Running on port' + PORT));
