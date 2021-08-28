@@ -10,6 +10,7 @@ const path = require('path');
 const fs = require('fs')
 require('dotenv').config()
 const { PostModal } = require('./schema/Schema')
+const PORT = process.env.PORT || 4000
 
 
 mongoose.connect(process.env.MONGODB_URL, {useNewUrlParser: true, useUnifiedTopology: true}, () => console.log('database is conneted'));
@@ -104,4 +105,4 @@ app.get('/blogs/blog/:blogId/',async function(request, response) {
 app.use(express.static(path.resolve(__dirname, '../fevison/build')));
 
 
-app.listen(4000, () => console.log('Server is Running'));
+app.listen(PORT, () => console.log('Server is Running on port' + PORT));
