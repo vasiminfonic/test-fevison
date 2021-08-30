@@ -8,6 +8,7 @@ const userRouter = require('./routers/userRouter');
 const mongoose = require('mongoose');
 const path = require('path');
 const fs = require('fs')
+// const { Helmet } = require('react-helmet');
 require('dotenv').config()
 const { PostModal } = require('./schema/Schema')
 const PORT = process.env.PORT || 4000
@@ -30,6 +31,18 @@ app.use('/user',userRouter);
 
 
 const filePath = path.resolve(__dirname, 'fevison/build', 'index.html')
+
+
+// const middleware = async (req, res, next) => {
+//   let context = {}
+//   let html = renderToString(
+//     React.createElement(StaticRouter, {
+//       location: req.url,
+//       context: context,
+//     })
+//   )
+
+  // const helmet = Helmet.renderStatic()
 
 app.get('/', function(request, response) {
   console.log('Home page visited!');
@@ -88,14 +101,14 @@ app.get('/blogs/blog/:blogId/',async function(request, response) {
   console.log(param)
 
   const seoData = await PostModal.findOne({slug:param})
-  console.log(seoData)
-
+  console.log(seoData);
   console.log('Blog page '+ param +' visited!' );
   fs.readFile(filePath, 'utf8', function (err,data) {
     if (err) {
       return console.log(err);
     }
-    data = data.replace(/\$OG_TITLE/g, seoData.seo_title);
+    // data = data.replace(/\$OG_TITLE/g, seoData.seo_title);
+    data = data.replace("</title>", `${seoData.title}</title>`);
     data = data.replace(/\$OG_DESCRIPTION/g, seoData.seo_description);
     result = data.replace(/\$OG_IMAGE/g, 'https://i.imgur.com/V7irMl8.png');
     response.send(result);
@@ -132,6 +145,7 @@ app.get('/element/', function(request, response) {
       return console.log(err);
     }
     data = data.replace(/\$OG_TITLE/g, 'Blog Page');
+    data = data.replace("</head>", `this is blog </head>`)
     data = data.replace(/\$OG_DESCRIPTION/g, "Blog page description");
     result = data.replace(/\$OG_IMAGE/g, 'https://i.imgur.com/V7irMl8.png');
     response.send(result);
@@ -167,6 +181,10 @@ app.get('/admin/', function(request, response) {
     response.send(result);
   });
 });
+
+
+
+
 
 app.use(express.static(path.resolve(__dirname, 'fevison/build')));
 
