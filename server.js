@@ -50,7 +50,7 @@ app.get('/', function(request, response) {
     if (err) {
       return console.log(err);
     }
-    data = data.replace("</title>", 'Home Page');
+    data = data.replace(/\$OG_TITLE/g, 'Home Page');
     data = data.replace(/\$OG_DESCRIPTION/g, "Home page description");
     result = data.replace(/\$OG_IMAGE/g, 'https://i.imgur.com/V7irMl8.png');
     response.send(result);
@@ -63,20 +63,20 @@ app.get('/about', function(request, response) {
     if (err) {
       return console.log(err);
     }
-    data = data.replace("</title>", 'About Page');
+    data = data.replace(/\$OG_TITLE/g, 'About Page');
     data = data.replace(/\$OG_DESCRIPTION/g, "About page description");
     result = data.replace(/\$OG_IMAGE/g, 'https://i.imgur.com/V7irMl8.png');
     response.send(result);
   });
 });
 
-app.get('/contacts', function(request, response) {
+app.get('/contact', function(request, response) {
   console.log('Contact page visited!');
   fs.readFile(filePath, 'utf8', function (err,data) {
     if (err) {
       return console.log(err);
     }
-    data = data.replace("</title>", 'Contact Page');
+    data = data.replace(/\$OG_TITLE/g, 'Contact Page');
     data = data.replace(/\$OG_DESCRIPTION/g, "Contact page description");
     result = data.replace(/\$OG_IMAGE/g, 'https://i.imgur.com/V7irMl8.png');
     response.send(result);
@@ -89,7 +89,7 @@ app.get('/blogs/', function(request, response) {
     if (err) {
       return console.log(err);
     }
-    data = data.replace("</title>", 'Blog Page');
+    data = data.replace(/\$OG_TITLE/g, 'Blog Page');
     data = data.replace(/\$OG_DESCRIPTION/g, "Blog page description");
     result = data.replace(/\$OG_IMAGE/g, 'https://i.imgur.com/V7irMl8.png');
     response.send(result);
@@ -114,7 +114,7 @@ app.get('/blogs/blog/:blogId/',async function(request, response) {
     response.send(result);
   });
 });
-app.get('/feature/', function(request, response) {
+app.get('/featur/', function(request, response) {
   console.log('feature page visited!');
   fs.readFile(filePath, 'utf8', function (err,data) {
     if (err) {
@@ -163,7 +163,7 @@ app.get('/blogs/category/:categoty',async function(request, response) {
     if (err) {
       return console.log(err);
     }
-    data = data.replace("</title>", param);
+    data = data.replace(/\$OG_TITLE/g, param);
     data = data.replace(/\$OG_DESCRIPTION/g, param);
     result = data.replace(/\$OG_IMAGE/g, 'https://i.imgur.com/V7irMl8.png');
     response.send(result);
@@ -175,7 +175,7 @@ app.get('/admin/', function(request, response) {
     if (err) {
       return console.log(err);
     }
-    data = data.replace("</title>", 'admin Page');
+    data = data.replace(/\$OG_TITLE/g, 'admin Page');
     data = data.replace(/\$OG_DESCRIPTION/g, "admin page description");
     result = data.replace(/\$OG_IMAGE/g, 'https://i.imgur.com/V7irMl8.png');
     response.send(result);
