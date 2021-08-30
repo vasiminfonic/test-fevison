@@ -259,6 +259,21 @@ router.get('/posts/', async (req,res) => {
 		res.send({ error: "Post doesn't exist!" })
 	});
 
+  router.post('test/posts/insert', async (req,res) => {
+    console.log(req.body)
+  
+	 const newPost = new postModal({
+     title: req.body.title,
+     paragraph: req.body.paragraph,
+     category: req.body.category,
+   })
+    newPost.save()
+		.then(doc=>res.json({message: 'data has been insertedcl' + doc}))
+    .catch(err=>res.json({err}))
+	
+		
+		res.send({ error: "Post doesn't exist!" })
+	});
 
 
 
