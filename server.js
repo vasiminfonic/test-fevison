@@ -70,7 +70,7 @@ app.get('/about', function(request, response) {
   });
 });
 
-app.get('/contact', function(request, response) {
+app.get('/contacts', function(request, response) {
   console.log('Contact page visited!');
   fs.readFile(filePath, 'utf8', function (err,data) {
     if (err) {
@@ -108,19 +108,19 @@ app.get('/blogs/blog/:blogId/',async function(request, response) {
       return console.log(err);
     }
     // data = data.replace(/\$OG_TITLE/g, seoData.seo_title);
-    data = data.replace("</title>", `${seoData.title}</title>`);
+    data = data.replace(/\$OG_TITLE/g, `${seoData.title}</title>`);
     data = data.replace(/\$OG_DESCRIPTION/g, seoData.seo_description);
     result = data.replace(/\$OG_IMAGE/g, 'https://i.imgur.com/V7irMl8.png');
     response.send(result);
   });
 });
-app.get('/featur/', function(request, response) {
+app.get('/feature/', function(request, response) {
   console.log('feature page visited!');
   fs.readFile(filePath, 'utf8', function (err,data) {
     if (err) {
       return console.log(err);
     }
-    data = data.replace("</title>", 'feature Page');
+    data = data.replace(/\$OG_TITLE/g, 'feature Page');
     data = data.replace(/\$OG_DESCRIPTION/g, "feature page description");
     result = data.replace(/\$OG_IMAGE/g, 'https://i.imgur.com/V7irMl8.png');
     response.send(result);
@@ -132,7 +132,7 @@ app.get('/price/', function(request, response) {
     if (err) {
       return console.log(err);
     }
-    data = data.replace("</title>", 'price Page');
+    data = data.replace(/\$OG_TITLE/g, 'price Page');
     data = data.replace(/\$OG_DESCRIPTION/g, "Price page description");
     result = data.replace(/\$OG_IMAGE/g, 'https://i.imgur.com/V7irMl8.png');
     response.send(result);
@@ -144,7 +144,7 @@ app.get('/element/', function(request, response) {
     if (err) {
       return console.log(err);
     }
-    data = data.replace("</title>", 'Blog Page');
+    data = data.replace(/\$OG_TITLE/g, 'Blog Page');
     data = data.replace("</head>", `this is blog </head>`)
     data = data.replace(/\$OG_DESCRIPTION/g, "Blog page description");
     result = data.replace(/\$OG_IMAGE/g, 'https://i.imgur.com/V7irMl8.png');
