@@ -56,7 +56,7 @@ router.post('/add',upload.array('image',10), async(req,res)=>{
       const newPost = new PostModal({
       _id: new mongoose.Types.ObjectId,
       title: req.body.title,
-      slug: slugify(`${req.body.title}`,{ lower: true }),
+      slug: slugify(`${req.body.title}`,{ lower: true, remove: /[*+~.()'"!:@]/g }),
       paragraph: req.body.paragraph,
       category: req.body.category,
       seo_title: req.body.seo_title,
