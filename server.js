@@ -26,7 +26,7 @@ app.use('/posts', postRouter);
 app.use('/category',categoryRouter);
 app.use('/user',userRouter);
 
-
+app.use(express.static('fevison/build'))
 
 
 
