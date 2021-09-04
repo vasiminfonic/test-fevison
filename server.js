@@ -11,7 +11,7 @@ const fs = require('fs')
 // const { Helmet } = require('react-helmet');
 require('dotenv').config()
 const { PostModal } = require('./schema/Schema')
-const PORT = process.env.PORT || 4000
+const PORT = process.env.PORT || 80
 
 
 mongoose.connect(process.env.MONGODB_URL, {useNewUrlParser: true, useUnifiedTopology: true}, () => console.log('database is conneted'));
